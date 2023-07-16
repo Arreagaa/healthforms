@@ -1,7 +1,11 @@
 <script setup>
-import AppHeader from "~/Layouts/AppHeader.vue";
+import FWelcome from "~/Components/FWelcome.vue";
 </script>
 <template>
-  <h1 class="text-2xl">hola</h1>
-  <AppHeader />
+  <section class="h-screen flex flex-col justify-end">
+    <div class="flex-1 bg-gradient-to-t from-white to-blue-200">
+      <FWelcome />
+    </div>
+    <div class="h-24 bg-white"></div>
+  </section>
 </template>
