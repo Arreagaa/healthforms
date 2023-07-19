@@ -13,7 +13,7 @@
     </div>
     <div class="flex flex-col items-center text-left mt-3">
       <NuxtLink
-        to="/kinder"
+        to="/form-kinder"
         class="border-link mt-3 w-full sm:w-96 inline-block rounded border border-blue-500 px-5 py-3 font-medium text-zinc-800 shadow-md hover:shake flex items-center"
       >
         <div class="mr-4">
@@ -25,7 +25,7 @@
         </div>
       </NuxtLink>
       <NuxtLink
-        to="/secu"
+        to="/form-secundaria"
         class="border-link mt-3 w-full sm:w-96 inline-block rounded border border-blue-500 px-5 py-3 font-medium text-zinc-800 shadow-md hover:shake flex items-center"
       >
         <div class="mr-4">
