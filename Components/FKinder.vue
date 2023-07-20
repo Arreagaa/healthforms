@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 import FTitle from "./utils/FTitle.vue";
 import FButtom from "./utils/FButtom.vue";
 import FCancel from "./utils/FCancel.vue";
@@ -28,6 +29,8 @@ export default {
   data() {
     return {
       healFormKinder: {
+        studentName: "",
+        grade: "",
         born: "",
         age: "",
         gender: "",
@@ -42,11 +45,11 @@ export default {
         homePhone: "",
         officePhone: "",
         emergencyPerson: "",
-        emergencyHomePhone: "",
-        emergencyOfficePhone: "",
-        pediatrician: "",
+        emergencyPhone: "",
+        emergencyPhone1: "",
+        doctor: "",
         clinicPhone: "",
-        pediatricianPhone: "",
+        doctorPhone: "",
         medicalInformation: "",
         allergies: "",
         vaccines: "",
@@ -56,12 +59,71 @@ export default {
         importInfo: "",
         signature: "",
       },
+      formSubmitSuccess: false,
+      formSubmitError: false,
     };
+  },
+  created() {
+    this.studentInfo();
+  },
+  methods: {
+    async studentInfo() {
+      try {
+        const requestBody = {
+          q: "MTk2OTpNVGsyT1Rwb2ZIaGxTSDQzVmtWMQ==",
+        };
+        const response = await axios.post(
+          "https://backend.schoolaid.app/med",
+          requestBody,
+          {
+            headers: {
+              "x-api-key": "4LbhvqUAA68LlKXUKl5VT80HbPwvultf2EmBN2qy",
+            },
+          }
+        );
+
+        const studentName = response.data.body.student;
+        const grade = response.data.body.grade;
+
+        this.healFormKinder.studentName = studentName;
+        this.healFormKinder.grade = grade;
+      } catch (error) {}
+    },
+
+    async submitForm() {
+      try {
+        await this.studentInfo();
+        const response = await axios.put(
+          "https://backend.schoolaid.app/med",
+          this.healFormKinder,
+          {
+            headers: {
+              "x-api-key": "4LbhvqUAA68LlKXUKl5VT80HbPwvultf2EmBN2qy",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          console.log("res:", this.healFormKinder);
+
+          this.formSubmitSuccess = true;
+          this.formSubmitError = false;
+        } else {
+          this.formSubmitSuccess = false;
+          this.formSubmitError = true;
+        }
+      } catch (error) {
+        console.error("Error al enviar el formulario:", error);
+        console.log("res on error:", this.healFormKinder);
+        this.formSubmitSuccess = false;
+        this.formSubmitError = true;
+      }
+    },
   },
 };
 </script>
 <template>
-  <form class="py-8">
+  <form class="py-8" @submit.prevent="submitForm">
     <div class="container mx-auto rounded">
       <FTitle title="Formulario de Kinder" />
       <div class="mx-auto">
@@ -83,13 +145,13 @@ export default {
                   name="name"
                   class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
                 >
-                  Nombre del Alumno
+                  {{ healFormKinder.studentName }}
                 </p>
               </div>
             </div>
             <div class="flex flex-col mb-6 px-4">
               <label for="Section" class="pb-2 text-sm font-bold text-gray-800"
-                >Sección</label
+                >Grado y Sección</label
               >
               <div class="border border-gray-300 shadow-sm rounded flex">
                 <div
@@ -102,26 +164,7 @@ export default {
                   name="section"
                   class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
                 >
-                  Sección
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-col mb-6 px-4">
-              <label for="Grade" class="pb-2 text-sm font-bold text-gray-800"
-                >Grado</label
-              >
-              <div class="border border-gray-300 shadow-sm rounded flex">
-                <div
-                  class="focus:outline-none px-4 py-3 flex items-center border-r border-gray-300 text-xl"
-                >
-                  <i class="fa fa-school"></i>
-                </div>
-                <p
-                  id="grade"
-                  name="grade"
-                  class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
-                >
-                  Grado
+                  {{ healFormKinder.grade }}
                 </p>
               </div>
             </div>
@@ -298,32 +341,32 @@ export default {
             />
             <FInput
               label="Teléfono de Casa"
-              for="emergencyHomePhone"
+              for="emergencyPhone"
               type="phone"
-              id="emergencyHomePhone"
-              name="emergencyHomePhone"
+              id="emergencyPhone"
+              name="emergencyPhone"
               placeholder="Teléfono de Casa"
-              @update:value="healFormKinder.emergencyHomePhone = $event"
+              @update:value="healFormKinder.emergencyPhone = $event"
               required
             />
             <FInput
               label="Teléfono de Oficina"
-              for="emergencyOfficePhone"
+              for="emergencyPhone1"
               type="phone"
-              id="emergencyOfficePhone"
-              name="emergencyOfficePhone"
+              id="emergencyPhone1"
+              name="emergencyPhone1"
               placeholder="Teléfono de Oficina"
-              @update:value="healFormKinder.emergencyOfficePhone = $event"
+              @update:value="healFormKinder.emergencyPhone1 = $event"
               required
             />
             <FInput
               label="Nombre del Pediatra"
-              for="pediatrician"
+              for="doctor"
               type="text"
-              id="pediatrician"
-              name="pediatrician"
+              id="doctor"
+              name="doctor"
               placeholder="Nombre del Pediatra"
-              @update:value="healFormKinder.pediatrician = $event"
+              @update:value="healFormKinder.doctor = $event"
               required
             />
             <FInput
@@ -338,12 +381,12 @@ export default {
             />
             <FInput
               label="Celular"
-              for="pediatricianPhone"
+              for="doctorPhone"
               type="phone"
-              id="pediatricianPhone"
-              name="pediatricianPhone"
+              id="doctorPhone"
+              name="doctorPhone"
               placeholder="Celular del Pediatra"
-              @update:value="healFormKinder.pediatricianPhone = $event"
+              @update:value="healFormKinder.doctorPhone = $event"
               required
             />
           </div>
@@ -469,9 +512,20 @@ export default {
         <FSignature
           label="Firma del encargado"
           :modelValue="healFormKinder.signature"
-          @update:modelValue="(signature) => (healFormKinder.signature = signature)"
+          @update:modelValue="
+            (signature) => (healFormKinder.signature = signature)
+          "
           required
         />
+      </div>
+      <div class="flex items-start">
+        <div v-if="formSubmitSuccess" class="alert-success">
+          Formulario enviado exitosamente.
+        </div>
+        <div v-if="formSubmitError" class="alert-danger">
+          Error al enviar el formulario. Por favor, inténtalo de nuevo más
+          tarde.
+        </div>
       </div>
     </div>
     <div class="container mx-auto w-11/12 xl:w-full px-4">

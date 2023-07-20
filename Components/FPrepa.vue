@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 import FTitle from "./utils/FTitle.vue";
 import FButtom from "./utils/FButtom.vue";
 import FCancel from "./utils/FCancel.vue";
@@ -32,6 +33,8 @@ export default {
   data() {
     return {
       healFormSecu: {
+        studentName: "",
+        grade: "",
         bloodGroup: "",
         mother: "",
         phoneMother: "",
@@ -43,9 +46,9 @@ export default {
         additionalAddress: "",
         additionalHomePhone: "",
         emergencyPerson: "",
-        emergencyHomePhone: "",
-        emergencyHomePhone1: "",
-        emergencyHomePhone2: "",
+        emergencyPhone: "",
+        emergencyPhone1: "",
+        emergencyPhone2: "",
         doctorsName: "",
         doctorsPhone: "",
         doctorsPhoneOffice: "",
@@ -61,12 +64,71 @@ export default {
         importInfo: "",
         signature: "",
       },
+      formSubmitSuccess: false,
+      formSubmitError: false,
     };
+  },
+  created() {
+    this.studentInfo();
+  },
+  methods: {
+    async studentInfo() {
+      try {
+        const requestBody = {
+          q: "MTk2OTpNVGsyT1Rwb2ZIaGxTSDQzVmtWMQ==",
+        };
+        const response = await axios.post(
+          "https://backend.schoolaid.app/med",
+          requestBody,
+          {
+            headers: {
+              "x-api-key": "4LbhvqUAA68LlKXUKl5VT80HbPwvultf2EmBN2qy",
+            },
+          }
+        );
+
+        const studentName = response.data.body.student;
+        const grade = response.data.body.grade;
+
+        this.healFormSecu.studentName = studentName;
+        this.healFormSecu.grade = grade;
+      } catch (error) {}
+    },
+
+    async submitForm() {
+      try {
+        await this.studentInfo();
+        const response = await axios.put(
+          "https://backend.schoolaid.app/med",
+          this.healFormSecu,
+          {
+            headers: {
+              "x-api-key": "4LbhvqUAA68LlKXUKl5VT80HbPwvultf2EmBN2qy",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          console.log("res:", this.healFormSecu);
+
+          this.formSubmitSuccess = true;
+          this.formSubmitError = false;
+        } else {
+          this.formSubmitSuccess = false;
+          this.formSubmitError = true;
+        }
+      } catch (error) {
+        console.error("Error al enviar el formulario:", error);
+        console.log("res on error:", this.healFormSecu);
+        this.formSubmitSuccess = false;
+        this.formSubmitError = true;
+      }
+    },
   },
 };
 </script>
 <template>
-  <form class="py-8">
+  <form class="py-8" @submit.prevent="submitForm">
     <div class="container mx-auto rounded">
       <FTitle title="Formulario de Secundaria y Prepa" />
       <div class="mx-auto">
@@ -88,13 +150,13 @@ export default {
                   name="name"
                   class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
                 >
-                  Nombre del Alumno
+                  {{ healFormSecu.studentName }}
                 </p>
               </div>
             </div>
             <div class="flex flex-col mb-6 px-4 pt-4">
               <label for="Section" class="pb-2 text-sm font-bold text-gray-800"
-                >Sección</label
+                >Grado y Sección</label
               >
               <div class="border border-gray-300 shadow-sm rounded flex">
                 <div
@@ -107,26 +169,7 @@ export default {
                   name="section"
                   class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
                 >
-                  Sección
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-col mb-6 px-4 pt-4">
-              <label for="Grade" class="pb-2 text-sm font-bold text-gray-800"
-                >Grado</label
-              >
-              <div class="border border-gray-300 shadow-sm rounded flex">
-                <div
-                  class="focus:outline-none px-4 py-3 flex items-center border-r border-gray-300 text-xl"
-                >
-                  <i class="fa fa-school"></i>
-                </div>
-                <p
-                  id="grade"
-                  name="grade"
-                  class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
-                >
-                  Grado
+                  {{ healFormSecu.grade }}
                 </p>
               </div>
             </div>
@@ -263,30 +306,30 @@ export default {
             />
             <FInput
               label="Teléfono en caso de emergencia"
-              for="emergencyHomePhone"
+              for="emergencyPhone"
               type="phone"
-              id="emergencyHomePhone"
-              name="emergencyHomePhone"
+              id="emergencyPhone"
+              name="emergencyPhone"
               placeholder="Teléfono en caso de emergencia"
-              @update:value="healFormSecu.emergencyHomePhone = $event"
+              @update:value="healFormSecu.emergencyPhone = $event"
             />
             <FInput
               label="Teléfono en caso de emergencia"
-              for="emergencyHomePhone1"
+              for="emergencyPhone1"
               type="phone"
-              id="emergencyHomePhone1"
-              name="emergencyHomePhone1"
+              id="emergencyPhone1"
+              name="emergencyPhone1"
               placeholder="Teléfono en caso de emergencia"
-              @update:value="healFormSecu.emergencyHomePhone1 = $event"
+              @update:value="healFormSecu.emergencyPhone1 = $event"
             />
             <FInput
               label="Teléfono en caso de emergencia"
-              for="emergencyHomePhone2"
+              for="emergencyPhone2"
               type="phone"
-              id="emergencyHomePhone2"
-              name="emergencyHomePhone2"
+              id="emergencyPhone2"
+              name="emergencyPhone2"
               placeholder="Teléfono en caso de emergencia"
-              @update:value="healFormSecu.emergencyHomePhone2 = $event"
+              @update:value="healFormSecu.emergencyPhone2 = $event"
               required
             />
           </div>
@@ -300,12 +343,12 @@ export default {
           <div class="my-6 grid md:grid-cols-2 grid-cols-1 gap-4">
             <FInput
               label="Nombre del Médico"
-              for="DoctorsName"
+              for="doctorsName"
               type="text"
-              id="DoctorsName"
-              name="DoctorsName"
+              id="doctorsName"
+              name="doctorsName"
               placeholder="Nombre del Médico"
-              @update:value="healFormSecu.DoctorsName = $event"
+              @update:value="healFormSecu.doctorsName = $event"
               required
             />
             <FInput
@@ -448,6 +491,15 @@ export default {
           "
           required
         />
+      </div>
+      <div class="flex items-start">
+        <div v-if="formSubmitSuccess" class="alert-success">
+          Formulario enviado exitosamente.
+        </div>
+        <div v-if="formSubmitError" class="alert-danger">
+          Error al enviar el formulario. Por favor, inténtalo de nuevo más
+          tarde.
+        </div>
       </div>
     </div>
     <div class="container mx-auto w-11/12 xl:w-full px-4">

@@ -12,6 +12,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      signaturePad: null,
+    };
+  },
   mounted() {
     this.initializeSignaturePad();
   },
