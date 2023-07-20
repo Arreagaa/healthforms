@@ -2,7 +2,7 @@
 import FCircule from "./utils/FCircule.vue";
 </script>
 <template>
-  <div class="flex justify-center items-center md:h-screen">
+  <div class="flex justify-center items-center lg:h-screen">
     <div class="lg:py-20 pt-16">
       <div class="container mx-auto px-4">
         <div class="flex flex-col lg:flex-row">
