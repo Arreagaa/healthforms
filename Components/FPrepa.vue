@@ -130,7 +130,7 @@ export default {
 };
 </script>
 <template>
-  <section class="pt-8">
+  <section>
     <FHeader />
   </section>
   <form class="pb-8" @submit.prevent="submitForm">
