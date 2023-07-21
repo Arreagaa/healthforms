@@ -36,7 +36,7 @@ import FCircule from "./utils/FCircule.vue";
                     to="/form-secundaria"
                     class="flex border-link rounded border border-blue-500 px-5 py-3 font-medium text-zinc-800 shadow-md hover:shake flex items-center"
                   >
-                    Formulario de Secundaria y Prepa
+                    Formulario de Primaria, Secundaria y Preparatoria
                   </NuxtLink>
                 </li>
               </ul>
