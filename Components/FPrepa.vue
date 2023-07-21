@@ -88,6 +88,7 @@ export default {
           }
         );
 
+<<<<<<< HEAD
         // const studentName = response.data.body.student;
         // const grade = response.data.body.grade;
 

@@ -82,12 +82,14 @@ export default {
           }
         );
 
+
         // const studentName = response.data.body.student;
         // const grade = response.data.body.grade;
 
         // this.healFormKinder.studentName = studentName;
         // this.healFormKinder.grade = grade;
         Object.assign(this.healFormKinder, response.data.body);
+
 
       } catch (error) {}
     },
