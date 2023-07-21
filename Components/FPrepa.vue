@@ -87,7 +87,7 @@ export default {
           }
         );
 
-        const studentName = response.data.body.student;
+        const studentName = response.data.body.studentName;
         const grade = response.data.body.grade;
 
         this.healFormSecu.studentName = studentName;
