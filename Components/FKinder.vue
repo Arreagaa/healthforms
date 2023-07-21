@@ -49,7 +49,7 @@ export default {
         emergencyPhone1: "",
         doctor: "",
         clinicPhone: "",
-        doctorPhone: "",
+        doctorsPhone: "",
         medicalInformation: "",
         allergies: "",
         vaccines: "",
@@ -70,7 +70,7 @@ export default {
     async studentInfo() {
       try {
         const requestBody = {
-          q: "MTk2OTpNVGsyT1Rwb2ZIaGxTSDQzVmtWMQ==",
+          q: this.$route.query.q,
         };
         const response = await axios.post(
           "https://backend.schoolaid.app/med",
@@ -82,20 +82,21 @@ export default {
           }
         );
 
-        const studentName = response.data.body.student;
-        const grade = response.data.body.grade;
+        // const studentName = response.data.body.student;
+        // const grade = response.data.body.grade;
 
-        this.healFormKinder.studentName = studentName;
-        this.healFormKinder.grade = grade;
+        // this.healFormKinder.studentName = studentName;
+        // this.healFormKinder.grade = grade;
+        Object.assign(this.healFormKinder, response.data.body);
+
       } catch (error) {}
     },
 
     async submitForm() {
       try {
-        await this.studentInfo();
         const response = await axios.put(
           "https://backend.schoolaid.app/med",
-          this.healFormKinder,
+          {...this.healFormKinder, q: this.$route.query.q},
           {
             headers: {
               "x-api-key": "4LbhvqUAA68LlKXUKl5VT80HbPwvultf2EmBN2qy",
@@ -123,7 +124,7 @@ export default {
 };
 </script>
 <template>
-  <form class="py-8" @submit.prevent="submitForm">
+  <form  v-if="this.healFormKinder.studentName != ''"  class="py-8" @submit.prevent="submitForm">
     <div class="container mx-auto rounded">
       <FTitle title="Formulario de Kinder" />
       <div class="mx-auto">
@@ -194,6 +195,7 @@ export default {
               id="age"
               name="age"
               placeholder="Edad"
+              :value="healFormKinder.age"
               @update:value="healFormKinder.age = $event"
               required
             />
@@ -204,6 +206,7 @@ export default {
               id="gender"
               name="gender"
               placeholder="Género"
+              :value="healFormKinder.gender"
               @update:value="healFormKinder.gender = $event"
               required
             />
@@ -214,6 +217,7 @@ export default {
               id="weight"
               name="weight"
               placeholder="Peso"
+              :value="healFormKinder.weight"
               @update:value="healFormKinder.weight = $event"
               required
             />
@@ -224,6 +228,7 @@ export default {
               id="height"
               name="height"
               placeholder="Estatura"
+              :value="healFormKinder.height"
               @update:value="healFormKinder.height = $event"
               required
             />
@@ -234,6 +239,7 @@ export default {
               id="bloodGroup"
               name="bloodGroup"
               placeholder="Grupo Sanguíneo"
+              :value="healFormKinder.bloodGroup"
               @update:value="healFormKinder.bloodGroup = $event"
               required
             />
@@ -253,6 +259,7 @@ export default {
               id="mother"
               name="mother"
               placeholder="Nombre de la Madre"
+              :value="healFormKinder.mother"
               @update:value="healFormKinder.mother = $event"
               required
             />
@@ -263,6 +270,7 @@ export default {
               id="phoneMother"
               name="phoneMother"
               placeholder="Celular de la Madre"
+              :value="healFormKinder.phoneMother"
               @update:value="healFormKinder.phoneMother = $event"
               required
             />
@@ -273,6 +281,7 @@ export default {
               id="father"
               name="father"
               placeholder="Nombre del Padre"
+              :value="healFormKinder.father"
               @update:value="healFormKinder.father = $event"
               required
             />
@@ -283,6 +292,7 @@ export default {
               id="phoneFather"
               name="phoneFather"
               placeholder="Celular del Padre"
+              :value="healFormKinder.phoneFather"
               @update:value="healFormKinder.phoneFather = $event"
               required
             />
@@ -294,6 +304,7 @@ export default {
                 id="address"
                 name="address"
                 placeholder="Dirección"
+                :value="healFormKinder.address"
                 @update:value="healFormKinder.address = $event"
                 required
               />
@@ -306,6 +317,7 @@ export default {
                 id="homePhone"
                 name="homePhone"
                 placeholder="Teléfono de Casa"
+                :value="healFormKinder.homePhone"
                 @update:value="healFormKinder.homePhone = $event"
                 required
               />
@@ -316,6 +328,7 @@ export default {
                 id="officePhone"
                 name="officePhone"
                 placeholder="Teléfono de Oficina"
+                :value="healFormKinder.officePhone"
                 @update:value="healFormKinder.officePhone = $event"
                 required
               />
@@ -336,6 +349,7 @@ export default {
               id="emergencyPerson"
               name="emergencyPerson"
               placeholder="Contacto de emergencia"
+              :value="healFormKinder.emergencyPerson"
               @update:value="healFormKinder.emergencyPerson = $event"
               required
             />
@@ -346,6 +360,7 @@ export default {
               id="emergencyPhone"
               name="emergencyPhone"
               placeholder="Teléfono de Casa"
+              :value="healFormKinder.emergencyPhone"
               @update:value="healFormKinder.emergencyPhone = $event"
               required
             />
@@ -356,6 +371,7 @@ export default {
               id="emergencyPhone1"
               name="emergencyPhone1"
               placeholder="Teléfono de Oficina"
+              :value="healFormKinder.emergencyPhone1"
               @update:value="healFormKinder.emergencyPhone1 = $event"
               required
             />
@@ -366,7 +382,8 @@ export default {
               id="doctor"
               name="doctor"
               placeholder="Nombre del Pediatra"
-              @update:value="healFormKinder.doctor = $event"
+              :value="healFormKinder.doctorsName"
+              @update:value="healFormKinder.doctorsName = $event"
               required
             />
             <FInput
@@ -376,7 +393,8 @@ export default {
               id="clinicPhone"
               name="clinicPhone"
               placeholder="Teléfono del Consultorio"
-              @update:value="healFormKinder.clinicPhone = $event"
+              :value="healFormKinder.doctorsPhoneOffice"
+              @update:value="healFormKinder.doctorsPhoneOffice = $event"
               required
             />
             <FInput
@@ -386,7 +404,8 @@ export default {
               id="doctorPhone"
               name="doctorPhone"
               placeholder="Celular del Pediatra"
-              @update:value="healFormKinder.doctorPhone = $event"
+              :value="healFormKinder.doctorsPhone"
+              @update:value="healFormKinder.doctorsPhone = $event"
               required
             />
           </div>
@@ -403,6 +422,7 @@ export default {
               for="medicalInformation"
               id="medicalInformation"
               name="medicalInformation"
+              :value="healFormKinder.medicalInformation"
               @update:value="healFormKinder.medicalInformation = $event"
               placeholder="¿Cuáles?"
             />
@@ -411,6 +431,7 @@ export default {
               for="allergies"
               id="allergies"
               name="allergies"
+              :value="healFormKinder.allergies"
               @update:value="healFormKinder.allergies = $event"
               placeholder="¿Cuáles?"
             />
@@ -421,6 +442,7 @@ export default {
               type="date"
               id="vaccines"
               name="vaccines"
+              :value="healFormKinder.vaccines"
               @update:value="healFormKinder.vaccines = $event"
               required
             />
@@ -432,6 +454,7 @@ export default {
               id="senses"
               name="senses"
               placeholder="vista, oído, olfato o gusto"
+              :value="healFormKinder.senses"
               @update:value="healFormKinder.senses = $event"
               required
             />
@@ -442,6 +465,7 @@ export default {
               id="medicine"
               name="medicine"
               placeholder="¿Qué medicamento está tomando?"
+              :value="healFormKinder.medicine"
               @update:value="healFormKinder.medicine = $event"
               required
             />
@@ -451,6 +475,7 @@ export default {
               id="areas"
               name="areas"
               placeholder="Adjunta alguna observación"
+              :value="healFormKinder.areas"
               @update:value="healFormKinder.areas = $event"
               required
             />
@@ -461,6 +486,7 @@ export default {
               id="importInfo"
               name="importInfo"
               placeholder="Adjunta alguna observación"
+              :value="healFormKinder.importInfo"
               @update:value="healFormKinder.importInfo = $event"
               required
             />
@@ -511,7 +537,6 @@ export default {
         <FDate />
         <FSignature
           label="Firma del encargado"
-          :modelValue="healFormKinder.signature"
           @update:modelValue="
             (signature) => (healFormKinder.signature = signature)
           "
