@@ -62,10 +62,10 @@ export default {
       ref="canvas"
     ></canvas>
     <div class="flex flex-col items-start space-y-2">
-      <button @click.prevent="clear" class="text-sm font-semibold">
+      <button @click.prevent="clear" class="border-signature">
         Borrar firma
       </button>
-      <button @click.prevent="updateSignature" class="text-sm font-semibold">
+      <button @click.prevent="updateSignature" class="border-signature">
         Guardar firma
       </button>
     </div>

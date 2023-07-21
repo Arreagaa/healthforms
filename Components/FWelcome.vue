@@ -24,18 +24,12 @@ import FCircule from "./utils/FCircule.vue";
                 class="flex flex-col lg:flex-row lg:space-x-2 lg:space-y-0 space-y-4 items-start"
               >
                 <li>
-                  <NuxtLink
-                    to="/form-kinder"
-                    class="flex border-link rounded border border-blue-500 px-5 py-3 font-medium text-zinc-800 shadow-md hover:shake flex items-center"
-                  >
+                  <NuxtLink to="/form-kinder" class="border-btn">
                     Formulario de Kinder
                   </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink
-                    to="/form-secundaria"
-                    class="flex border-link rounded border border-blue-500 px-5 py-3 font-medium text-zinc-800 shadow-md hover:shake flex items-center"
-                  >
+                  <NuxtLink to="/form-secundaria" class="border-btn">
                     Formulario de Secundaria y Prepa
                   </NuxtLink>
                 </li>
@@ -77,30 +71,3 @@ import FCircule from "./utils/FCircule.vue";
     </div>
   </div>
 </template>
-<style>
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-2px);
-  }
-  50% {
-    transform: translateX(2px);
-  }
-  75% {
-    transform: translateX(-2px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-@media (max-width: 320px) {
-  .border-link {
-    width: 90%;
-  }
-}
-.hover\:shake:hover {
-  animation: shake 0.5s;
-}
-</style>

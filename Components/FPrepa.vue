@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import FHeader from "./Info-form/FHeader.vue";
 import FTitle from "./utils/FTitle.vue";
 import FButtom from "./utils/FButtom.vue";
 import FCancel from "./utils/FCancel.vue";
@@ -28,6 +29,7 @@ export default {
     FRecommendations,
     FSelectionInput,
     FBannner,
+    FHeader,
     FSelection,
   },
   data() {
@@ -128,7 +130,10 @@ export default {
 };
 </script>
 <template>
-  <form class="py-8" @submit.prevent="submitForm">
+  <section class="pt-8">
+    <FHeader />
+  </section>
+  <form class="pb-8" @submit.prevent="submitForm">
     <div class="container mx-auto rounded">
       <FTitle title="Formulario de Secundaria y Prepa" />
       <div class="mx-auto">
