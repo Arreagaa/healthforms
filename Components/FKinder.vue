@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import FSelection from "./utils/FSelection.vue";
 import FHeader from "./Info-form/FHeader.vue";
 import FTitle from "./utils/FTitle.vue";
 import FButtom from "./utils/FButtom.vue";
@@ -24,6 +25,7 @@ export default {
     FText,
     FDate,
     FHeader,
+    FSelection,
     FSelect,
     FSignature,
     FRecommendations,
@@ -50,6 +52,9 @@ export default {
         phoneFatherOffice: "",
         address: "",
         homePhone: "",
+        selection: "",
+        additionalAddress: "",
+        additionalAddressPhone: "",
         emergencyPerson: "",
         emergencyPhone: "",
         emergencyPhone1: "",
@@ -123,6 +128,14 @@ export default {
         console.log("res on error:", this.healFormKinder);
         this.formSubmitSuccess = false;
         this.formSubmitError = true;
+      }
+    },
+  },
+  watch: {
+    "healFormKinder.selection": function (newValue) {
+      if (newValue === "No") {
+        this.healFormKinder.additionalAddress = "No";
+        this.healFormKinder.additionalAddressPhone = "No";
       }
     },
   },
@@ -230,7 +243,7 @@ export default {
               @update:value="healFormKinder.gender = $event"
               required
             >
-              <option disabled selected>Seleccionar el Género</option>
+              <option disabled selected value="">Seleccionar el Género</option>
               <option value="Masculino">Masculino</option>
               <option value="Femenino">Femenino</option>
             </FSelect>
@@ -344,6 +357,34 @@ export default {
               name="homePhone"
               placeholder="Formato 55 0000 0000"
               @update:value="healFormKinder.homePhone = $event"
+              required
+            />
+            <FSelection
+              label="¿Desea agregar una dirección adicional?"
+              name="selection"
+              @update:value="healFormKinder.selection = $event"
+            />
+          </div>
+          <div
+            v-if="healFormKinder.selection === 'Si'"
+            class="grid md:grid-cols-2 grid-cols-1 gap-4"
+          >
+            <FInput
+              label="Dirección Adicional"
+              type="text"
+              id="additionalAddress"
+              name="additionalAddress"
+              placeholder="Dirección Adicional"
+              @update:value="healFormKinder.additionalAddress = $event"
+              required
+            />
+            <FInput
+              label="Teléfono de la Dirección Adicional"
+              type="phone"
+              id="additionalAddressPhone"
+              name="additionalAddressPhone"
+              placeholder="Formato 55 0000 0000"
+              @update:value="healFormKinder.additionalAddressPhone = $event"
               required
             />
           </div>

@@ -47,6 +47,9 @@ export default {
         phoneFatherOffice: "",
         address: "",
         homePhone: "",
+        selection: "",
+        additionalAddress: "",
+        additionalAddressPhone: "",
         emergencyPerson: "",
         emergencyPhone: "",
         emergencyPhone1: "",
@@ -121,6 +124,14 @@ export default {
         console.log("res on error:", this.healFormSecu);
         this.formSubmitSuccess = false;
         this.formSubmitError = true;
+      }
+    },
+  },
+  watch: {
+    "healFormSecu.selection": function (newValue) {
+      if (newValue === "No") {
+        this.healFormSecu.additionalAddress = "No";
+        this.healFormSecu.additionalAddressPhone = "No";
       }
     },
   },
@@ -286,6 +297,34 @@ export default {
               name="homePhone"
               placeholder="Formato 55 0000 0000"
               @update:value="healFormSecu.homePhone = $event"
+              required
+            />
+            <FSelection
+              label="¿Desea agregar una dirección adicional?"
+              name="selection"
+              @update:value="healFormSecu.selection = $event"
+            />
+          </div>
+          <div
+            v-if="healFormSecu.selection === 'Si'"
+            class="grid md:grid-cols-2 grid-cols-1 gap-4"
+          >
+            <FInput
+              label="Dirección Adicional"
+              type="text"
+              id="additionalAddress"
+              name="additionalAddress"
+              placeholder="Dirección Adicional"
+              @update:value="healFormSecu.additionalAddress = $event"
+              required
+            />
+            <FInput
+              label="Teléfono de la Dirección Adicional"
+              type="phone"
+              id="additionalAddressPhone"
+              name="additionalAddressPhone"
+              placeholder="Formato 55 0000 0000"
+              @update:value="healFormSecu.additionalAddressPhone = $event"
               required
             />
           </div>
