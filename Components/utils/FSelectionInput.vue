@@ -71,7 +71,7 @@ export default {
 </script>
 <template>
   <div class="flex flex-col px-4 pt-4">
-    <label :for="name" class="pb-2 text-sm font-bold text-gray-800">
+    <label class="pb-2 text-sm font-bold text-gray-800">
       {{ label }}
     </label>
     <div class="flex flex-col items-start space-y-2">

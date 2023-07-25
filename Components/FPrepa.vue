@@ -138,7 +138,7 @@ export default {
           <FBannner />
           <div class="py-12 grid md:grid-cols-2 grid-cols-1 gap-4">
             <div class="flex flex-col mb-6 px-4 pt-4">
-              <label for="Name" class="pb-2 text-sm font-bold text-gray-800"
+              <label class="pb-2 text-sm font-bold text-gray-800"
                 >Nombre y Apellido del Alumno/a</label
               >
               <div class="border border-gray-300 shadow-sm rounded flex">
@@ -157,7 +157,7 @@ export default {
               </div>
             </div>
             <div class="flex flex-col mb-6 px-4 pt-4">
-              <label for="section" class="pb-2 text-sm font-bold text-gray-800"
+              <label class="pb-2 text-sm font-bold text-gray-800"
                 >Grado y Sección</label
               >
               <div class="border border-gray-300 shadow-sm rounded flex">
@@ -176,7 +176,7 @@ export default {
               </div>
             </div>
             <div class="flex flex-col mb-6 px-4 pt-4">
-              <label for="Curp" class="pb-2 text-sm font-bold text-gray-800"
+              <label class="pb-2 text-sm font-bold text-gray-800"
                 >Clave Única de Registro de Población (CURP)</label
               >
               <div class="border border-gray-300 shadow-sm rounded flex">

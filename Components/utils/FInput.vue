@@ -34,7 +34,7 @@ export default {
 </script>
 <template>
   <div class="flex flex-col px-4 pt-4">
-    <label :for="'input-' + name" class="pb-2 text-sm font-bold text-gray-800">
+    <label class="pb-2 text-sm font-bold text-gray-800">
       {{ label }}
     </label>
     <span v-if="description" class="text-sm py-2 text-gray-600">
