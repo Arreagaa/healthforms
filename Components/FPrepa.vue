@@ -37,16 +37,16 @@ export default {
       healFormSecu: {
         studentName: "",
         grade: "",
+        curp: "",
         bloodGroup: "",
         mother: "",
         phoneMother: "",
+        phoneMotherOffice: "",
         father: "",
         phoneFather: "",
+        phoneFatherOffice: "",
         address: "",
         homePhone: "",
-        officePhone: "",
-        additionalAddress: "",
-        additionalHomePhone: "",
         emergencyPerson: "",
         emergencyPhone: "",
         emergencyPhone1: "",
@@ -57,12 +57,9 @@ export default {
         allDayPhone: "",
         condition: "",
         treatment: "",
-        dosage: "",
         medication: "",
         allergies: "",
         vaccines: "",
-        covidVaccines: "",
-        hadCovid: "",
         importInfo: "",
         signature: "",
       },
@@ -142,7 +139,7 @@ export default {
           <div class="py-12 grid md:grid-cols-2 grid-cols-1 gap-4">
             <div class="flex flex-col mb-6 px-4 pt-4">
               <label for="Name" class="pb-2 text-sm font-bold text-gray-800"
-                >Nombre del Alumno</label
+                >Nombre y Apellido del Alumno/a</label
               >
               <div class="border border-gray-300 shadow-sm rounded flex">
                 <div
@@ -160,7 +157,7 @@ export default {
               </div>
             </div>
             <div class="flex flex-col mb-6 px-4 pt-4">
-              <label for="Section" class="pb-2 text-sm font-bold text-gray-800"
+              <label for="section" class="pb-2 text-sm font-bold text-gray-800"
                 >Grado y Sección</label
               >
               <div class="border border-gray-300 shadow-sm rounded flex">
@@ -178,13 +175,31 @@ export default {
                 </p>
               </div>
             </div>
+            <div class="flex flex-col mb-6 px-4 pt-4">
+              <label for="Curp" class="pb-2 text-sm font-bold text-gray-800"
+                >Clave Única de Registro de Población (CURP)</label
+              >
+              <div class="border border-gray-300 shadow-sm rounded flex">
+                <div
+                  class="focus:outline-none px-4 py-3 flex items-center border-r border-gray-300 text-xl"
+                >
+                  <i class="fa-solid fa-address-card"></i>
+                </div>
+                <p
+                  id="Curp"
+                  name="Curp"
+                  class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
+                >
+                  CURP
+                </p>
+              </div>
+            </div>
             <FInput
-              label="Adjuntar Grupo Sanguíneo"
-              for="bloodGroup"
+              label="Grupo Sanguíneo"
               type="text"
               id="bloodGroup"
               name="bloodGroup"
-              placeholder="Grupo Sanguíneo"
+              placeholder="Ej. O+"
               @update:value="healFormSecu.bloodGroup = $event"
               required
             />
@@ -198,96 +213,79 @@ export default {
         <div class="container">
           <div class="my-6 grid md:grid-cols-2 grid-cols-1 gap-4">
             <FInput
-              label="Nombre de la Madre"
-              for="mother"
+              label="Nombre y Apellido de la Madre"
               type="text"
               id="mother"
               name="mother"
-              placeholder="Nombre de la Madre"
+              placeholder="Nombre y Apellido de la Madre"
               @update:value="healFormSecu.mother = $event"
               required
             />
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
+              <FInput
+                label="Celular de la Madre"
+                type="phone"
+                id="phoneMother"
+                name="phoneMother"
+                placeholder="Formato 55 0000 0000"
+                @update:value="healFormSecu.phoneMother = $event"
+                required
+              />
+              <FInput
+                label="Celular de su Oficina"
+                type="phone"
+                id="phoneMotherOffice"
+                name="phoneMotherOffice"
+                placeholder="Formato 55 0000 0000"
+                @update:value="healFormSecu.phoneMotherOffice = $event"
+                required
+              />
+            </div>
             <FInput
-              label="Celular de la Madre"
-              for="phoneMother"
-              type="phone"
-              id="phoneMother"
-              name="phoneMother"
-              placeholder="Celular de la Madre"
-              @update:value="healFormSecu.phoneMother = $event"
-              required
-            />
-            <FInput
-              label="Nombre del Padre"
-              for="father"
+              label="Nombre y Apellido del Padre"
               type="text"
               id="father"
               name="father"
-              placeholder="Nombre del Padre"
+              placeholder="Nombre y Apellido del Padre"
               @update:value="healFormSecu.father = $event"
               required
             />
-            <FInput
-              label="Celular del Padre"
-              for="phoneFather"
-              type="phone"
-              id="phoneFather"
-              name="phoneFather"
-              placeholder="Celular del Padre"
-              @update:value="healFormSecu.phoneFather = $event"
-              required
-            />
-            <div class="grid grid-cols-1">
-              <FInput
-                label="Dirección"
-                for="address"
-                type="text"
-                id="address"
-                name="address"
-                placeholder="Dirección"
-                @update:value="healFormSecu.address = $event"
-                required
-              />
-            </div>
             <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
               <FInput
-                label="Teléfono de Casa"
-                for="homePhone"
+                label="Celular del Padre"
                 type="phone"
-                id="homePhone"
-                name="homePhone"
-                placeholder="Teléfono de Casa"
-                @update:value="healFormSecu.homePhone = $event"
+                id="phoneFather"
+                name="phoneFather"
+                placeholder="Formato 55 0000 0000"
+                @update:value="healFormSecu.phoneFather = $event"
                 required
               />
               <FInput
-                label="Teléfono de Oficina"
-                for="officePhone"
+                label="Celular de su Oficina"
                 type="phone"
-                id="officePhone"
-                name="officePhone"
-                placeholder="Teléfono de Oficina"
-                @update:value="healFormSecu.officePhone = $event"
+                id="phoneFatherOffice"
+                name="phoneFatherOffice"
+                placeholder="Formato 55 0000 0000"
+                @update:value="healFormSecu.phoneFatherOffice = $event"
                 required
               />
             </div>
             <FInput
-              label="Dirección Adicional"
-              for="additionalAddress"
+              label="Dirección"
               type="text"
-              id="additionalAddress"
-              name="additionalAddress"
-              placeholder="Dirección Adicional"
-              @update:value="healFormSecu.additionalAddress = $event"
+              id="address"
+              name="address"
+              placeholder="Dirección"
+              @update:value="healFormSecu.address = $event"
+              required
             />
             <FInput
-              label="Teléfono Adicional"
-              for="additionalHomePhone"
+              label="Teléfono de Casa"
               type="phone"
-              id="additionalHomePhone"
-              name="additionalHomePhone"
-              placeholder="Teléfono Adicional"
-              @update:value="healFormSecu.additionalHomePhone = $event"
+              id="homePhone"
+              name="homePhone"
+              placeholder="Formato 55 0000 0000"
+              @update:value="healFormSecu.homePhone = $event"
               required
             />
           </div>
@@ -301,7 +299,6 @@ export default {
           <div class="my-6 grid md:grid-cols-2 grid-cols-1 gap-4">
             <FInput
               label="Contacto en caso de emergencia"
-              for="emergencyPerson"
               type="text"
               id="emergencyPerson"
               name="emergencyPerson"
@@ -311,29 +308,26 @@ export default {
             />
             <FInput
               label="Teléfono en caso de emergencia"
-              for="emergencyPhone"
               type="phone"
               id="emergencyPhone"
               name="emergencyPhone"
-              placeholder="Teléfono en caso de emergencia"
+              placeholder="Formato 55 0000 0000"
               @update:value="healFormSecu.emergencyPhone = $event"
             />
             <FInput
               label="Teléfono en caso de emergencia"
-              for="emergencyPhone1"
               type="phone"
               id="emergencyPhone1"
               name="emergencyPhone1"
-              placeholder="Teléfono en caso de emergencia"
+              placeholder="Formato 55 0000 0000"
               @update:value="healFormSecu.emergencyPhone1 = $event"
             />
             <FInput
               label="Teléfono en caso de emergencia"
-              for="emergencyPhone2"
               type="phone"
               id="emergencyPhone2"
               name="emergencyPhone2"
-              placeholder="Teléfono en caso de emergencia"
+              placeholder="Formato 55 0000 0000"
               @update:value="healFormSecu.emergencyPhone2 = $event"
               required
             />
@@ -342,13 +336,12 @@ export default {
       </div>
     </div>
     <div class="container mx-auto bg-white rounded">
-      <FTitle title="Información Importante" />
+      <FTitle title="Información Médica" />
       <div class="pt-4">
         <div class="container">
           <div class="my-6 grid md:grid-cols-2 grid-cols-1 gap-4">
             <FInput
               label="Nombre del Médico"
-              for="doctorsName"
               type="text"
               id="doctorsName"
               name="doctorsName"
@@ -358,37 +351,33 @@ export default {
             />
             <FInput
               label="Celular del Médico"
-              for="doctorsPhone"
               type="phone"
               id="doctorsPhone"
               name="doctorsPhone"
-              placeholder="Celular del Médico"
+              placeholder="Formato 55 0000 0000"
               @update:value="healFormSecu.doctorsPhone = $event"
               required
             />
             <FInput
               label="Teléfono del Consultorio"
-              for="doctorsPhoneOffice"
               type="phone"
               id="doctorsPhoneOffice"
               name="doctorsPhoneOffice"
-              placeholder="Teléfono del Consultorio"
+              placeholder="Formato 55 0000 0000 ext. 000"
               @update:value="healFormSecu.doctorsPhoneOffice = $event"
               required
             />
             <FInput
               label="Teléfono 24 horas"
-              for="allDayPhone"
               type="phone"
               id="allDayPhone"
               name="allDayPhone"
-              placeholder="Teléfono 24 horas"
+              placeholder="Formato 55 0000 0000"
               @update:value="healFormSecu.allDayPhone = $event"
               required
             />
             <FSelectionInput
-              label="¿Su hijo tiene algún padecimiento que requiera tratamiento?"
-              for="condition"
+              label="¿Algún padecimiento que requiera tratamiento?"
               type="text"
               id="condition"
               name="condition"
@@ -396,9 +385,9 @@ export default {
               @update:value="healFormSecu.condition = $event"
               required
             />
-            <FSelectionInput
+            <FInput
               label="¿Qué tratamiento requiere?"
-              for="treatment"
+              description="Especificar el tratamiento:"
               type="text"
               id="treatment"
               name="treatment"
@@ -407,18 +396,7 @@ export default {
               required
             />
             <FSelectionInput
-              label="¿Qué dosis necesita con dicho tratamiento, si fuera requerido?"
-              for="dosage"
-              type="text"
-              id="dosage"
-              name="dosage"
-              placeholder="¿Cuál?"
-              @update:value="healFormSecu.dosage = $event"
-              required
-            />
-            <FSelectionInput
               label="¿Está tomando algún medicamento?"
-              for="medication"
               type="text"
               id="medication"
               name="medication"
@@ -427,51 +405,27 @@ export default {
               required
             />
             <FSelectionInput
-              label="¿Su hijo tiene alguna alergia?"
-              description="Especificar:"
-              for="allergies"
+              label="¿Tiene alguna alergia?"
               type="text"
               id="allergies"
               name="allergies"
-              placeholder="¿Cuál?"
+              placeholder="Especificar"
               @update:value="healFormSecu.allergies = $event"
               required
             />
             <FSelectionInput
               label="¿Se encuentra al corriente de sus vacunas?"
               description="Fecha de su última vacuna de tétanos:"
-              for="vaccines"
               type="date"
               id="vaccines"
               name="vaccines"
               @update:value="healFormSecu.vaccines = $event"
               required
             />
-            <FSelectionInput
-              label="¿Está vacunado de covid?"
-              description="¿Dosis de vacunas contra el covid?:"
-              for="covidVaccines"
-              type="text"
-              id="covidVaccines"
-              name="covidVaccines"
-              placeholder="¿Hasta cuál dosis?"
-              @update:value="healFormSecu.covidVaccines = $event"
-              required
-            />
-            <FSelectionInput
-              label="¿Ha tenido covid?"
-              description="Especificar hace cuánto tuve covid:"
-              for="hadCovid"
-              type="text"
-              id="hadCovid"
-              name="hadCovid"
-              placeholder="¿Cuándo?"
-              @update:value="healFormSecu.hadCovid = $event"
-              required
-            />
-            <FTextArea
+          </div>
+          <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
+            <FText
               label="¿Desea adjuntar alguna observación importante?"
-              for="importInfo"
               id="importInfo"
               name="importInfo"
               @update:value="healFormSecu.importInfo = $event"
@@ -489,7 +443,7 @@ export default {
       <div class="my-6">
         <FDate />
         <FSignature
-          label="Firma del encargado"
+          label="Firma Padre/Madre o Tutor"
           :modelValue="healFormSecu.signature"
           @update:modelValue="
             (signature) => (healFormSecu.signature = signature)

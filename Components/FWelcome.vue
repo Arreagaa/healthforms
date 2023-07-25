@@ -30,7 +30,7 @@ import FCircule from "./utils/FCircule.vue";
                 </li>
                 <li>
                   <NuxtLink to="/form-secundaria" class="border-btn">
-                    Formulario de Secundaria y Preparatoria
+                    Formulario de Primaria, Secundaria y Preparatoria
                   </NuxtLink>
                 </li>
               </ul>

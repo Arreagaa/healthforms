@@ -7,8 +7,8 @@
     </p>
     <p class="font-bold">
       Por favor, informen a la enfermería en caso de que se presente alguna
-      enfermedad infectocontagiosa. Les pedimos que NO ENVIAR a los niños al
-      colegio.
+      enfermedad infectocontagiosa. En este caso les pedimos NO ENVIAR A LOS
+      ALUMNOS AL COLEGIO.
     </p>
     <p>
       Contamos con un seguro de gastos médicos para accidentes escolares de sus

@@ -25,6 +25,10 @@ export default {
       type: String,
       default: "",
     },
+    description: {
+      type: String,
+      default: "",
+    },
   },
 };
 </script>
@@ -33,6 +37,9 @@ export default {
     <label :for="'input-' + name" class="pb-2 text-sm font-bold text-gray-800">
       {{ label }}
     </label>
+    <span v-if="description" class="text-sm py-2 text-gray-600">
+      {{ description }}
+    </span>
     <input
       :type="type"
       :id="'input-' + name"
