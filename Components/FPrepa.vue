@@ -186,25 +186,16 @@ export default {
                 </p>
               </div>
             </div>
-            <div class="flex flex-col mb-6 px-4 pt-4">
-              <label class="pb-2 text-sm font-bold text-gray-800"
-                >Clave Única de Registro de Población (CURP)</label
-              >
-              <div class="border border-gray-300 shadow-sm rounded flex">
-                <div
-                  class="focus:outline-none px-4 py-3 flex items-center border-r border-gray-300 text-xl"
-                >
-                  <i class="fa-solid fa-address-card"></i>
-                </div>
-                <p
-                  id="Curp"
-                  name="Curp"
-                  class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
-                >
-                  CURP
-                </p>
-              </div>
-            </div>
+            <FInput
+              label="Clave Única de Registro de Población (CURP)"
+              type="text"
+              id="curp"
+              name="curp"
+              placeholder="CURP"
+              :value="healFormSecu.curp"
+              @update:value="healFormSecu.curp = $event"
+              required
+            />
             <FInput
               label="Grupo Sanguíneo"
               type="text"

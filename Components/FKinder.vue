@@ -152,7 +152,7 @@ export default {
         <div class="xl:mx-0">
           <FBannner />
           <div class="py-12 grid md:grid-cols-2 grid-cols-1 gap-4">
-            <div class="flex flex-col mb-6 px-4">
+            <div class="flex flex-col mb-6 px-4 pt-4">
               <label class="pb-2 text-sm font-bold text-gray-800"
                 >Nombre y Apellido del Alumno/a</label
               >
@@ -171,7 +171,7 @@ export default {
                 </p>
               </div>
             </div>
-            <div class="flex flex-col mb-6 px-4">
+            <div class="flex flex-col mb-6 px-4 pt-4">
               <label class="pb-2 text-sm font-bold text-gray-800"
                 >Grado y Sección</label
               >
@@ -190,25 +190,16 @@ export default {
                 </p>
               </div>
             </div>
-            <div class="flex flex-col mb-6 px-4">
-              <label class="pb-2 text-sm font-bold text-gray-800"
-                >Clave Única de Registro de Población (CURP)</label
-              >
-              <div class="border border-gray-300 shadow-sm rounded flex">
-                <div
-                  class="focus:outline-none px-4 py-3 flex items-center border-r border-gray-300 text-xl"
-                >
-                  <i class="fa-solid fa-address-card"></i>
-                </div>
-                <p
-                  id="Curp"
-                  name="Curp"
-                  class="pl-3 py-3 w-full text-sm focus:outline-none placeholder-gray-500 rounded bg-transparent text-gray-600"
-                >
-                  CURP
-                </p>
-              </div>
-            </div>
+            <FInput
+              label="Clave Única de Registro de Población (CURP)"
+              type="text"
+              id="curp"
+              name="curp"
+              placeholder="CURP"
+              :value="healFormKinder.curp"
+              @update:value="healFormKinder.curp = $event"
+              required
+            />
           </div>
         </div>
       </div>
