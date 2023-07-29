@@ -56,6 +56,7 @@ export default {
         additionalAddress: "",
         additionalAddressPhone: "",
         emergencyPerson: "",
+        relationship: "",
         emergencyPhone: "",
         emergencyPhone1: "",
         doctor: "",
@@ -248,7 +249,7 @@ export default {
               required
             />
             <FInput
-              label="Estatura"
+              label="Estatura (Cms)"
               type="text"
               id="height"
               name="height"
@@ -394,6 +395,15 @@ export default {
               name="emergencyPerson"
               placeholder="Contacto de emergencia"
               @update:value="healFormKinder.emergencyPerson = $event"
+              required
+            />
+            <FInput
+              label="Parentesco"
+              type="text"
+              id="relationship"
+              name="relationship"
+              placeholder="Parentesco del contacto de emergencia"
+              @update:value="healFormKinder.relationship = $event"
               required
             />
             <FInput

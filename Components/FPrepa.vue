@@ -51,6 +51,7 @@ export default {
         additionalAddress: "",
         additionalAddressPhone: "",
         emergencyPerson: "",
+        relationship: "",
         emergencyPhone: "",
         emergencyPhone1: "",
         emergencyPhone2: "",
@@ -334,6 +335,15 @@ export default {
               name="emergencyPerson"
               placeholder="Contacto de emergencia"
               @update:value="healFormSecu.emergencyPerson = $event"
+              required
+            />
+            <FInput
+              label="Parentesco"
+              type="text"
+              id="relationship"
+              name="relationship"
+              placeholder="Parentesco del contacto de emergencia"
+              @update:value="healFormSecu.relationship = $event"
               required
             />
             <FInput
